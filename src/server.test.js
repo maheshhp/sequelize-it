@@ -15,14 +15,14 @@ describe('Testing the Hapi server that processes the requests', () => {
       done();
     });
   });
-  test('Should return 200 status code for sucessful POST request', (done) => {
+  test('Should return 201 status code for sucessful POST request', (done) => {
     const request = {
       method: 'POST',
       url: '/users/new',
       payload: JSON.stringify({ firstName: 'John', lastName: 'Doe' }),
     };
     Server.inject(request, (response) => {
-      expect(response.statusCode).toBe(200);
+      expect(response.result.statusCode).toBe(201);
       done();
     });
   });
@@ -33,8 +33,18 @@ describe('Testing the Hapi server that processes the requests', () => {
       payload: JSON.stringify({ firstName: 'Jane', lastName: 'Doe' }),
     };
     Server.inject(request, (response) => {
-      console.log(response.data);
-      expect(response.data.firstName).toMatch('Jane');
+      expect(response.result.data.firstName).toMatch('Jane');
+      done();
+    });
+  });
+  test('Should return data of deleted user on sucessful POST request', (done) => {
+    const request = {
+      method: 'POST',
+      url: '/users/delete',
+      payload: JSON.stringify({ firstName: 'Jane', lastName: 'Doe' }),
+    };
+    Server.inject(request, (response) => {
+      expect(response.result.data.lastName).toMatch('Doe');
       done();
     });
   });
