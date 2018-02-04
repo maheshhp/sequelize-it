@@ -52,10 +52,10 @@ describe('Testing the Hapi server that processes the requests', () => {
     const request = {
       method: 'POST',
       url: '/users/update',
-      payload: JSON.stringify({ firstName: 'John', newFirstName: 'Joe' }),
+      payload: JSON.stringify({ old: { firstName: 'John' }, new: { firstName: 'Joe' } }),
     };
     Server.inject(request, (response) => {
-      expect(response.result.result).toBe(false);
+      expect(response.result.result).toEqual([1]);
       done();
     });
   });

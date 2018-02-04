@@ -70,4 +70,27 @@ module.exports = [{
         });
       });
   },
+},
+{
+  method: 'POST',
+  path: '/users/update',
+  handler: (request, response) => {
+    Models.User.update(
+      request.payload.new,
+      {
+        where: request.payload.old,
+      },
+    ).then((result) => {
+      response({
+        statusCode: 200,
+        result,
+      });
+    })
+      .catch((error) => {
+        response({
+          data: `Error has occurred => ${error}`,
+          statusCode: 500,
+        });
+      });
+  },
 }];
