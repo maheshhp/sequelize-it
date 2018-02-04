@@ -37,7 +37,7 @@ describe('Testing the Hapi server that processes the requests', () => {
       done();
     });
   });
-  test('Should return data of deleted user on sucessful POST request', (done) => {
+  test('Should return success or failure of deleted record on sucessful POST request', (done) => {
     const request = {
       method: 'POST',
       url: '/users/delete',
@@ -45,6 +45,17 @@ describe('Testing the Hapi server that processes the requests', () => {
     };
     Server.inject(request, (response) => {
       expect(response.result.result).toBe(1);
+      done();
+    });
+  });
+  test('Should return data of updated record on sucessful POST request', (done) => {
+    const request = {
+      method: 'POST',
+      url: '/users/update',
+      payload: JSON.stringify({ firstName: 'John', newFirstName: 'Joe' }),
+    };
+    Server.inject(request, (response) => {
+      expect(response.result.result).toBe(false);
       done();
     });
   });
