@@ -44,7 +44,7 @@ describe('Testing the Hapi server that processes the requests', () => {
       payload: JSON.stringify({ firstName: 'Jane', lastName: 'Doe' }),
     };
     Server.inject(request, (response) => {
-      expect(response.result.data.lastName).toMatch('Doe');
+      expect(response.result.result).toBe(1);
       done();
     });
   });

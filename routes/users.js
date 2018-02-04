@@ -47,4 +47,27 @@ module.exports = [{
         });
       });
   },
+},
+{
+  method: 'POST',
+  path: '/users/delete',
+  handler: (request, response) => {
+    Models.User.destroy({
+      where: {
+        lastName: request.payload.lastName,
+        firstName: request.payload.firstName,
+      },
+    }).then((result) => {
+      response({
+        statusCode: 200,
+        result,
+      });
+    })
+      .catch((error) => {
+        response({
+          data: `Error has occurred => ${error}`,
+          statusCode: 500,
+        });
+      });
+  },
 }];
