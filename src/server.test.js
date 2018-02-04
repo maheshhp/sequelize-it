@@ -14,7 +14,6 @@ describe('Testing the Hapi server that processes the requests', () => {
       expect(response.statusCode).toBe(200);
       done();
     });
-    expect(Routes.length).toBe(Server.table('localhost')[0].table.length);
   });
   test('Should return 200 status code for sucessful POST request', (done) => {
     const request = {
@@ -25,6 +24,5 @@ describe('Testing the Hapi server that processes the requests', () => {
       expect(response.statusCode).toBe(200);
       done();
     });
-    expect(Routes.length).toBe(Server.table('localhost')[0].table.length);
   });
 });
